@@ -1,0 +1,804 @@
+{
+  
+  "products": [
+    {
+      "id": 1, "categoryId": 1, "name": "Galaxy S25 Ultra", "brand": "Samsung",
+      "price": 1299, "rating": 4.8, "reviews": 2840, "inStock": true,
+      "specs": {
+        "display": "6.9\" QHD+ 120Hz AMOLED", "battery": "5000mAh", "camera": "200MP + 12MP + 10MP + 10MP",
+        "ram": "12GB", "storage": "256GB", "weight": "218g", "os": "Android 15", "chipset": "Snapdragon 8 Elite",
+        "connectivity": ["5G", "WiFi 7", "Bluetooth 5.4", "NFC"], "color": "Titanium Black"
+      },
+      "tags": ["flagship", "5G", "S-Pen"], "image": "https://via.placeholder.com/300x300?text=Galaxy+S25+Ultra"
+    },
+    {
+      "id": 2, "categoryId": 1, "name": "iPhone 16 Pro Max", "brand": "Apple",
+      "price": 1199, "rating": 4.9, "reviews": 5120, "inStock": true,
+      "specs": {
+        "display": "6.7\" ProMotion Super Retina XDR OLED", "battery": "4685mAh", "camera": "48MP Fusion + 12MP + 48MP Tetraprism",
+        "ram": "8GB", "storage": "256GB", "weight": "227g", "os": "iOS 18", "chipset": "Apple A18 Pro",
+        "connectivity": ["5G", "WiFi 7", "Bluetooth 5.3", "NFC", "UWB"], "color": "Desert Titanium"
+      },
+      "tags": ["flagship", "5G", "ProRAW"], "image": "https://via.placeholder.com/300x300?text=iPhone+16+Pro+Max"
+    },
+    {
+      "id": 3, "categoryId": 1, "name": "Pixel 9 Pro", "brand": "Google",
+      "price": 999, "rating": 4.7, "reviews": 1680, "inStock": true,
+      "specs": {
+        "display": "6.3\" OLED LTPO 120Hz", "battery": "4700mAh", "camera": "50MP + 48MP + 48MP",
+        "ram": "16GB", "storage": "128GB", "weight": "221g", "os": "Android 15", "chipset": "Google Tensor G4",
+        "connectivity": ["5G", "WiFi 7", "Bluetooth 5.3", "NFC", "UWB"], "color": "Obsidian"
+      },
+      "tags": ["AI", "5G", "Google AI"], "image": "https://via.placeholder.com/300x300?text=Pixel+9+Pro"
+    },
+    {
+      "id": 4, "categoryId": 1, "name": "OnePlus 13", "brand": "OnePlus",
+      "price": 799, "rating": 4.6, "reviews": 1240, "inStock": true,
+      "specs": {
+        "display": "6.82\" AMOLED LTPO3 120Hz", "battery": "6000mAh", "camera": "50MP Hasselblad + 50MP + 50MP",
+        "ram": "12GB", "storage": "256GB", "weight": "210g", "os": "OxygenOS 15", "chipset": "Snapdragon 8 Elite",
+        "connectivity": ["5G", "WiFi 7", "Bluetooth 5.4", "NFC"], "color": "Midnight Ocean"
+      },
+      "tags": ["fast charge", "5G", "Hasselblad"], "image": "https://via.placeholder.com/300x300?text=OnePlus+13"
+    },
+    {
+      "id": 5, "categoryId": 1, "name": "Xiaomi 15 Pro", "brand": "Xiaomi",
+      "price": 899, "rating": 4.5, "reviews": 980, "inStock": true,
+      "specs": {
+        "display": "6.73\" AMOLED LTPO 120Hz", "battery": "6100mAh", "camera": "50MP Leica + 50MP + 50MP",
+        "ram": "16GB", "storage": "512GB", "weight": "215g", "os": "MIUI 16", "chipset": "Snapdragon 8 Elite",
+        "connectivity": ["5G", "WiFi 7", "Bluetooth 5.4", "NFC"], "color": "Black"
+      },
+      "tags": ["Leica", "5G", "fast charge"], "image": "https://via.placeholder.com/300x300?text=Xiaomi+15+Pro"
+    },
+    {
+      "id": 6, "categoryId": 1, "name": "Oppo Find X8", "brand": "Oppo",
+      "price": 849, "rating": 4.4, "reviews": 760, "inStock": true,
+      "specs": {
+        "display": "6.59\" AMOLED LTPO 120Hz", "battery": "5630mAh", "camera": "50MP Hasselblad + 50MP + 50MP",
+        "ram": "12GB", "storage": "256GB", "weight": "203g", "os": "ColorOS 15", "chipset": "Dimensity 9400",
+        "connectivity": ["5G", "WiFi 7", "Bluetooth 5.4", "NFC"], "color": "Space Black"
+      },
+      "tags": ["5G", "Hasselblad"], "image": "https://via.placeholder.com/300x300?text=Oppo+Find+X8"
+    },
+    {
+      "id": 7, "categoryId": 1, "name": "Sony Xperia 1 VI", "brand": "Sony",
+      "price": 1099, "rating": 4.5, "reviews": 620, "inStock": true,
+      "specs": {
+        "display": "6.5\" 4K OLED 120Hz", "battery": "5000mAh", "camera": "52MP + 12MP + 48MP Zeiss",
+        "ram": "12GB", "storage": "256GB", "weight": "192g", "os": "Android 15", "chipset": "Snapdragon 8 Gen 3",
+        "connectivity": ["5G", "WiFi 7", "Bluetooth 5.4", "NFC"], "color": "Black"
+      },
+      "tags": ["4K display", "5G", "Zeiss"], "image": "https://via.placeholder.com/300x300?text=Xperia+1+VI"
+    },
+    {
+      "id": 8, "categoryId": 1, "name": "Motorola Edge 50 Pro", "brand": "Motorola",
+      "price": 599, "rating": 4.3, "reviews": 890, "inStock": true,
+      "specs": {
+        "display": "6.7\" pOLED 144Hz", "battery": "4500mAh", "camera": "50MP + 13MP + 10MP",
+        "ram": "12GB", "storage": "256GB", "weight": "186g", "os": "Android 14", "chipset": "Snapdragon 7s Gen 3",
+        "connectivity": ["5G", "WiFi 6E", "Bluetooth 5.3", "NFC"], "color": "Luxe Lavender"
+      },
+      "tags": ["5G", "144Hz"], "image": "https://via.placeholder.com/300x300?text=Moto+Edge+50+Pro"
+    },
+    {
+      "id": 9, "categoryId": 1, "name": "Nothing Phone 3", "brand": "Nothing",
+      "price": 699, "rating": 4.6, "reviews": 1100, "inStock": true,
+      "specs": {
+        "display": "6.55\" AMOLED LTPO 120Hz", "battery": "5000mAh", "camera": "50MP + 50MP",
+        "ram": "12GB", "storage": "256GB", "weight": "190g", "os": "Nothing OS 3.0", "chipset": "Snapdragon 8 Gen 3",
+        "connectivity": ["5G", "WiFi 7", "Bluetooth 5.4", "NFC"], "color": "Black"
+      },
+      "tags": ["Glyph Interface", "5G"], "image": "https://via.placeholder.com/300x300?text=Nothing+Phone+3"
+    },
+    {
+      "id": 10, "categoryId": 1, "name": "Vivo X100 Pro", "brand": "Vivo",
+      "price": 749, "rating": 4.4, "reviews": 540, "inStock": true,
+      "specs": {
+        "display": "6.78\" AMOLED LTPO 120Hz", "battery": "5400mAh", "camera": "50MP Zeiss + 50MP + 64MP Periscope",
+        "ram": "16GB", "storage": "256GB", "weight": "221g", "os": "OriginOS 4", "chipset": "Dimensity 9300",
+        "connectivity": ["5G", "WiFi 7", "Bluetooth 5.4", "NFC"], "color": "Asteroid Black"
+      },
+      "tags": ["Zeiss", "5G", "periscope"], "image": "https://via.placeholder.com/300x300?text=Vivo+X100+Pro"
+    },
+    {
+      "id": 11, "categoryId": 1, "name": "Asus ROG Phone 9", "brand": "Asus",
+      "price": 1099, "rating": 4.7, "reviews": 780, "inStock": true,
+      "specs": {
+        "display": "6.78\" AMOLED 165Hz", "battery": "6000mAh", "camera": "50MP + 13MP + 32MP",
+        "ram": "16GB", "storage": "512GB", "weight": "239g", "os": "ROG UI (Android 15)", "chipset": "Snapdragon 8 Elite",
+        "connectivity": ["5G", "WiFi 7", "Bluetooth 5.4", "NFC"], "color": "Storm White"
+      },
+      "tags": ["Gaming", "5G", "165Hz"], "image": "https://via.placeholder.com/300x300?text=ROG+Phone+9"
+    },
+    {
+      "id": 12, "categoryId": 1, "name": "Honor Magic 7 Pro", "brand": "Honor",
+      "price": 849, "rating": 4.5, "reviews": 430, "inStock": true,
+      "specs": {
+        "display": "6.8\" OLED LTPO 120Hz", "battery": "5850mAh", "camera": "200MP + 50MP + 50MP",
+        "ram": "12GB", "storage": "256GB", "weight": "223g", "os": "MagicOS 9", "chipset": "Snapdragon 8 Elite",
+        "connectivity": ["5G", "WiFi 7", "Bluetooth 5.4", "NFC"], "color": "Black"
+      },
+      "tags": ["5G", "200MP"], "image": "https://via.placeholder.com/300x300?text=Honor+Magic+7+Pro"
+    },
+    {
+      "id": 13, "categoryId": 1, "name": "Realme GT 7 Pro", "brand": "Realme",
+      "price": 699, "rating": 4.4, "reviews": 560, "inStock": false,
+      "specs": {
+        "display": "6.78\" AMOLED LTPO 120Hz", "battery": "6500mAh", "camera": "50MP + 8MP + 50MP",
+        "ram": "12GB", "storage": "256GB", "weight": "219g", "os": "realme UI 6.0", "chipset": "Snapdragon 8 Elite",
+        "connectivity": ["5G", "WiFi 7", "Bluetooth 5.4", "NFC"], "color": "Mars Orange"
+      },
+      "tags": ["fast charge", "5G", "6500mAh"], "image": "https://via.placeholder.com/300x300?text=Realme+GT+7+Pro"
+    },
+    {
+      "id": 14, "categoryId": 1, "name": "Samsung Galaxy A56", "brand": "Samsung",
+      "price": 449, "rating": 4.3, "reviews": 1870, "inStock": true,
+      "specs": {
+        "display": "6.7\" Super AMOLED 120Hz", "battery": "5000mAh", "camera": "50MP + 12MP + 5MP",
+        "ram": "8GB", "storage": "128GB", "weight": "198g", "os": "Android 15", "chipset": "Exynos 1580",
+        "connectivity": ["5G", "WiFi 6", "Bluetooth 5.3", "NFC"], "color": "Awesome Navy"
+      },
+      "tags": ["5G", "mid-range"], "image": "https://via.placeholder.com/300x300?text=Galaxy+A56"
+    },
+    {
+      "id": 15, "categoryId": 1, "name": "iPhone 16e", "brand": "Apple",
+      "price": 599, "rating": 4.5, "reviews": 2100, "inStock": true,
+      "specs": {
+        "display": "6.1\" Super Retina XDR OLED", "battery": "3279mAh", "camera": "48MP Fusion",
+        "ram": "8GB", "storage": "128GB", "weight": "167g", "os": "iOS 18", "chipset": "Apple A16 Bionic",
+        "connectivity": ["5G", "WiFi 6", "Bluetooth 5.3", "NFC"], "color": "Black"
+      },
+      "tags": ["compact", "5G", "value"], "image": "https://via.placeholder.com/300x300?text=iPhone+16e"
+    },
+
+    {
+      "id": 16, "categoryId": 2, "name": "MacBook Pro 16\"", "brand": "Apple",
+      "price": 2499, "rating": 4.9, "reviews": 3200, "inStock": true,
+      "specs": {
+        "display": "16.2\" Liquid Retina XDR 120Hz", "battery": "22hr", "camera": "12MP Center Stage",
+        "ram": "18GB Unified", "storage": "512GB SSD", "weight": "2.14kg", "os": "macOS Sequoia",
+        "chipset": "Apple M4 Pro", "gpu": "20-core GPU", "ports": ["Thunderbolt 4 x3", "HDMI", "SD Card", "MagSafe 3"],
+        "color": "Space Black"
+      },
+      "tags": ["M4 Pro", "Creator", "ProMotion"], "image": "https://via.placeholder.com/300x300?text=MacBook+Pro+16"
+    },
+    {
+      "id": 17, "categoryId": 2, "name": "Dell XPS 15", "brand": "Dell",
+      "price": 1799, "rating": 4.7, "reviews": 2100, "inStock": true,
+      "specs": {
+        "display": "15.6\" OLED 3.5K 120Hz", "battery": "13hr", "camera": "1080p IR",
+        "ram": "16GB DDR5", "storage": "512GB NVMe SSD", "weight": "1.86kg", "os": "Windows 11",
+        "chipset": "Intel Core Ultra 7 155H", "gpu": "NVIDIA RTX 4060", "ports": ["Thunderbolt 4 x2", "USB-A", "SD Card"],
+        "color": "Platinum Silver"
+      },
+      "tags": ["OLED", "thin", "gaming-capable"], "image": "https://via.placeholder.com/300x300?text=Dell+XPS+15"
+    },
+    {
+      "id": 18, "categoryId": 2, "name": "ThinkPad X1 Carbon Gen 12", "brand": "Lenovo",
+      "price": 1599, "rating": 4.8, "reviews": 1760, "inStock": true,
+      "specs": {
+        "display": "14\" IPS 2.8K 120Hz", "battery": "15hr", "camera": "1080p IR + ToF",
+        "ram": "16GB LPDDR5x", "storage": "512GB SSD", "weight": "1.12kg", "os": "Windows 11 Pro",
+        "chipset": "Intel Core Ultra 7 165U", "gpu": "Intel Arc", "ports": ["Thunderbolt 4 x2", "USB-A x2", "HDMI 2.1"],
+        "color": "Deep Black"
+      },
+      "tags": ["Business", "ultralight", "MIL-SPEC"], "image": "https://via.placeholder.com/300x300?text=ThinkPad+X1+Carbon"
+    },
+    {
+      "id": 19, "categoryId": 2, "name": "HP Spectre x360 14", "brand": "HP",
+      "price": 1399, "rating": 4.6, "reviews": 1420, "inStock": true,
+      "specs": {
+        "display": "14\" OLED 2.8K 120Hz Touch", "battery": "17hr", "camera": "9MP + IR",
+        "ram": "16GB LPDDR5", "storage": "512GB SSD", "weight": "1.36kg", "os": "Windows 11",
+        "chipset": "Intel Core Ultra 7 155U", "gpu": "Intel Arc", "ports": ["Thunderbolt 4 x2", "USB-A", "microSD"],
+        "color": "Nightfall Black"
+      },
+      "tags": ["2-in-1", "OLED", "touch"], "image": "https://via.placeholder.com/300x300?text=HP+Spectre+x360"
+    },
+    {
+      "id": 20, "categoryId": 2, "name": "ASUS ROG Zephyrus G16", "brand": "Asus",
+      "price": 2199, "rating": 4.8, "reviews": 1100, "inStock": true,
+      "specs": {
+        "display": "16\" OLED 240Hz QHD+", "battery": "10hr", "camera": "1080p",
+        "ram": "32GB DDR5", "storage": "1TB NVMe SSD", "weight": "1.85kg", "os": "Windows 11",
+        "chipset": "AMD Ryzen AI 9 HX 370", "gpu": "NVIDIA RTX 4080", "ports": ["Thunderbolt 4", "USB-A x2", "HDMI 2.1", "SD Card"],
+        "color": "Eclipse Gray"
+      },
+      "tags": ["Gaming", "RTX 4080", "OLED 240Hz"], "image": "https://via.placeholder.com/300x300?text=ROG+Zephyrus+G16"
+    },
+    {
+      "id": 21, "categoryId": 2, "name": "Microsoft Surface Pro 11", "brand": "Microsoft",
+      "price": 1299, "rating": 4.5, "reviews": 980, "inStock": true,
+      "specs": {
+        "display": "13\" PixelSense 2K 120Hz Touch", "battery": "14hr", "camera": "13MP + 1080p front",
+        "ram": "16GB", "storage": "512GB SSD", "weight": "895g", "os": "Windows 11",
+        "chipset": "Snapdragon X Elite", "gpu": "Adreno", "ports": ["USB-C x2", "Surface Connect"],
+        "color": "Platinum"
+      },
+      "tags": ["2-in-1", "ARM", "thin"], "image": "https://via.placeholder.com/300x300?text=Surface+Pro+11"
+    },
+    {
+      "id": 22, "categoryId": 2, "name": "Samsung Galaxy Book 4 Ultra", "brand": "Samsung",
+      "price": 1899, "rating": 4.6, "reviews": 720, "inStock": true,
+      "specs": {
+        "display": "16\" AMOLED 3K 120Hz", "battery": "12hr", "camera": "4MP",
+        "ram": "32GB LPDDR5x", "storage": "1TB NVMe SSD", "weight": "1.86kg", "os": "Windows 11",
+        "chipset": "Intel Core Ultra 9 185H", "gpu": "NVIDIA RTX 4070", "ports": ["Thunderbolt 4 x2", "USB-A x2", "HDMI 2.0", "microSD"],
+        "color": "Moon Gray"
+      },
+      "tags": ["AMOLED", "Creator"], "image": "https://via.placeholder.com/300x300?text=Galaxy+Book+4+Ultra"
+    },
+    {
+      "id": 23, "categoryId": 2, "name": "Razer Blade 16", "brand": "Razer",
+      "price": 2799, "rating": 4.7, "reviews": 890, "inStock": true,
+      "specs": {
+        "display": "16\" QHD+ 240Hz Mini-LED", "battery": "10hr", "camera": "1080p",
+        "ram": "32GB DDR5", "storage": "1TB SSD", "weight": "2.14kg", "os": "Windows 11",
+        "chipset": "Intel Core i9-14900HX", "gpu": "NVIDIA RTX 4090", "ports": ["Thunderbolt 5", "USB-A x3", "HDMI 2.1", "SD Card"],
+        "color": "Black"
+      },
+      "tags": ["Gaming", "RTX 4090", "premium"], "image": "https://via.placeholder.com/300x300?text=Razer+Blade+16"
+    },
+    {
+      "id": 24, "categoryId": 2, "name": "LG Gram 17", "brand": "LG",
+      "price": 1499, "rating": 4.6, "reviews": 640, "inStock": true,
+      "specs": {
+        "display": "17\" IPS 2K 60Hz", "battery": "18hr", "camera": "FHD",
+        "ram": "16GB LPDDR5", "storage": "512GB SSD", "weight": "1.35kg", "os": "Windows 11",
+        "chipset": "Intel Core Ultra 7 155H", "gpu": "Intel Arc", "ports": ["Thunderbolt 4 x2", "USB-A x3", "HDMI", "microSD"],
+        "color": "White"
+      },
+      "tags": ["ultralight", "long battery", "MIL-SPEC"], "image": "https://via.placeholder.com/300x300?text=LG+Gram+17"
+    },
+    {
+      "id": 25, "categoryId": 2, "name": "Acer Swift 5", "brand": "Acer",
+      "price": 999, "rating": 4.4, "reviews": 870, "inStock": true,
+      "specs": {
+        "display": "14\" IPS 2.5K 100Hz Touch", "battery": "16hr", "camera": "1080p IR",
+        "ram": "16GB LPDDR5", "storage": "512GB SSD", "weight": "0.99kg", "os": "Windows 11",
+        "chipset": "Intel Core Ultra 5 125U", "gpu": "Intel Arc", "ports": ["Thunderbolt 4 x2", "USB-A", "HDMI"],
+        "color": "Mist Green"
+      },
+      "tags": ["ultralight", "sub-1kg", "touch"], "image": "https://via.placeholder.com/300x300?text=Acer+Swift+5"
+    },
+    {
+      "id": 26, "categoryId": 2, "name": "Framework Laptop 16", "brand": "Framework",
+      "price": 1599, "rating": 4.7, "reviews": 530, "inStock": true,
+      "specs": {
+        "display": "16\" IPS 2K 165Hz", "battery": "9hr", "camera": "1080p",
+        "ram": "32GB DDR5", "storage": "1TB SSD", "weight": "2.1kg", "os": "Windows 11 / Linux",
+        "chipset": "AMD Ryzen 7 7840HS", "gpu": "AMD Radeon RX 7700S (modular)", "ports": ["USB4 x2", "USB-A x2", "modular expansion"],
+        "color": "Gray"
+      },
+      "tags": ["modular", "repairable", "right-to-repair"], "image": "https://via.placeholder.com/300x300?text=Framework+16"
+    },
+    {
+      "id": 27, "categoryId": 2, "name": "MacBook Air 15\"", "brand": "Apple",
+      "price": 1299, "rating": 4.8, "reviews": 4100, "inStock": true,
+      "specs": {
+        "display": "15.3\" Liquid Retina 60Hz", "battery": "18hr", "camera": "12MP Center Stage",
+        "ram": "16GB Unified", "storage": "256GB SSD", "weight": "1.51kg", "os": "macOS Sequoia",
+        "chipset": "Apple M3", "gpu": "10-core GPU", "ports": ["Thunderbolt 3 x2", "MagSafe 3", "3.5mm"],
+        "color": "Midnight"
+      },
+      "tags": ["M3", "fanless", "slim"], "image": "https://via.placeholder.com/300x300?text=MacBook+Air+15"
+    },
+    {
+      "id": 28, "categoryId": 2, "name": "HP EliteBook 840 G11", "brand": "HP",
+      "price": 1299, "rating": 4.5, "reviews": 680, "inStock": true,
+      "specs": {
+        "display": "14\" IPS 2.5K 60Hz", "battery": "13hr", "camera": "5MP IR",
+        "ram": "16GB LPDDR5", "storage": "512GB SSD", "weight": "1.32kg", "os": "Windows 11 Pro",
+        "chipset": "Intel Core Ultra 5 134U", "gpu": "Intel Arc", "ports": ["Thunderbolt 4 x2", "USB-A x2", "HDMI 2.0"],
+        "color": "Silver"
+      },
+      "tags": ["Business", "vPro", "Wolf Security"], "image": "https://via.placeholder.com/300x300?text=HP+EliteBook+840"
+    },
+    {
+      "id": 29, "categoryId": 2, "name": "Lenovo Legion 5i Pro", "brand": "Lenovo",
+      "price": 1499, "rating": 4.6, "reviews": 1230, "inStock": true,
+      "specs": {
+        "display": "16\" IPS 2K 165Hz", "battery": "8hr", "camera": "1080p",
+        "ram": "16GB DDR5", "storage": "512GB SSD", "weight": "2.5kg", "os": "Windows 11",
+        "chipset": "Intel Core i7-14700HX", "gpu": "NVIDIA RTX 4070", "ports": ["Thunderbolt 4", "USB-A x4", "HDMI 2.1", "SD Card"],
+        "color": "Onyx Grey"
+      },
+      "tags": ["Gaming", "RTX 4070", "165Hz"], "image": "https://via.placeholder.com/300x300?text=Legion+5i+Pro"
+    },
+    {
+      "id": 30, "categoryId": 2, "name": "MSI Prestige 16 AI+", "brand": "MSI",
+      "price": 1399, "rating": 4.5, "reviews": 410, "inStock": false,
+      "specs": {
+        "display": "16\" OLED 3.2K 120Hz", "battery": "12hr", "camera": "FHD IR",
+        "ram": "32GB LPDDR5x", "storage": "1TB SSD", "weight": "1.79kg", "os": "Windows 11",
+        "chipset": "Intel Core Ultra 9 185H", "gpu": "NVIDIA RTX 4070", "ports": ["Thunderbolt 4 x2", "USB-A x2", "HDMI 2.1", "SD Card"],
+        "color": "Urban Silver"
+      },
+      "tags": ["OLED", "Creator", "AI"], "image": "https://via.placeholder.com/300x300?text=MSI+Prestige+16"
+    },
+
+    {
+      "id": 31, "categoryId": 3, "name": "iPad Pro 13 M4", "brand": "Apple",
+      "price": 1299, "rating": 4.9, "reviews": 2800, "inStock": true,
+      "specs": {
+        "display": "13\" Ultra Retina XDR OLED 120Hz", "battery": "10hr", "camera": "12MP TrueDepth + 12MP LiDAR",
+        "ram": "16GB", "storage": "256GB", "weight": "579g", "os": "iPadOS 18",
+        "chipset": "Apple M4", "connectivity": ["WiFi 6E", "Bluetooth 5.3", "USB 4"], "color": "Space Black"
+      },
+      "tags": ["OLED", "M4", "Pencil Pro"], "image": "https://via.placeholder.com/300x300?text=iPad+Pro+13+M4"
+    },
+    {
+      "id": 32, "categoryId": 3, "name": "Galaxy Tab S10 Ultra", "brand": "Samsung",
+      "price": 1199, "rating": 4.7, "reviews": 1560, "inStock": true,
+      "specs": {
+        "display": "14.6\" Dynamic AMOLED 2X 120Hz", "battery": "11200mAh", "camera": "13MP + 8MP",
+        "ram": "12GB", "storage": "256GB", "weight": "718g", "os": "Android 15 (One UI 7)",
+        "chipset": "Snapdragon 8 Gen 3", "connectivity": ["WiFi 7", "Bluetooth 5.3", "USB-C 3.2"], "color": "Moonstone Gray"
+      },
+      "tags": ["AMOLED", "S Pen included", "DeX"], "image": "https://via.placeholder.com/300x300?text=Galaxy+Tab+S10+Ultra"
+    },
+    {
+      "id": 33, "categoryId": 3, "name": "iPad Air 11 M2", "brand": "Apple",
+      "price": 799, "rating": 4.8, "reviews": 3200, "inStock": true,
+      "specs": {
+        "display": "11\" Liquid Retina 60Hz", "battery": "10hr", "camera": "12MP + 12MP front",
+        "ram": "8GB", "storage": "128GB", "weight": "462g", "os": "iPadOS 18",
+        "chipset": "Apple M2", "connectivity": ["WiFi 6E", "Bluetooth 5.3", "USB-C"], "color": "Blue"
+      },
+      "tags": ["M2", "mid-range", "value"], "image": "https://via.placeholder.com/300x300?text=iPad+Air+11+M2"
+    },
+    {
+      "id": 34, "categoryId": 3, "name": "Microsoft Surface Pro 10", "brand": "Microsoft",
+      "price": 1099, "rating": 4.5, "reviews": 980, "inStock": true,
+      "specs": {
+        "display": "13\" PixelSense 2K 120Hz Touch", "battery": "14hr", "camera": "10MP + 5MP front",
+        "ram": "16GB LPDDR5", "storage": "256GB SSD", "weight": "879g", "os": "Windows 11",
+        "chipset": "Intel Core Ultra 5 134U", "connectivity": ["WiFi 6E", "Bluetooth 5.3", "USB-C x2"], "color": "Platinum"
+      },
+      "tags": ["2-in-1", "Windows", "stylus"], "image": "https://via.placeholder.com/300x300?text=Surface+Pro+10"
+    },
+    {
+      "id": 35, "categoryId": 3, "name": "Lenovo Tab P12 Pro", "brand": "Lenovo",
+      "price": 699, "rating": 4.5, "reviews": 620, "inStock": true,
+      "specs": {
+        "display": "12.6\" AMOLED 3K 120Hz", "battery": "10200mAh", "camera": "13MP + 8MP front",
+        "ram": "8GB", "storage": "256GB", "weight": "565g", "os": "Android 14",
+        "chipset": "Snapdragon 870", "connectivity": ["WiFi 6", "Bluetooth 5.2", "USB-C 3.1"], "color": "Storm Grey"
+      },
+      "tags": ["AMOLED", "Precision Pen 3"], "image": "https://via.placeholder.com/300x300?text=Lenovo+Tab+P12+Pro"
+    },
+    {
+      "id": 36, "categoryId": 3, "name": "Amazon Fire HD 12", "brand": "Amazon",
+      "price": 299, "rating": 4.2, "reviews": 2400, "inStock": true,
+      "specs": {
+        "display": "12\" IPS FHD 60Hz", "battery": "14hr", "camera": "8MP + 5MP front",
+        "ram": "4GB", "storage": "64GB", "weight": "539g", "os": "Fire OS 8",
+        "chipset": "MediaTek MT8188J", "connectivity": ["WiFi 6", "Bluetooth 5.3", "USB-C"], "color": "Black"
+      },
+      "tags": ["budget", "Alexa", "kids-friendly"], "image": "https://via.placeholder.com/300x300?text=Fire+HD+12"
+    },
+    {
+      "id": 37, "categoryId": 3, "name": "Xiaomi Pad 7 Pro", "brand": "Xiaomi",
+      "price": 549, "rating": 4.6, "reviews": 780, "inStock": true,
+      "specs": {
+        "display": "12.1\" LCD 3K 144Hz", "battery": "10500mAh", "camera": "50MP + 20MP front",
+        "ram": "12GB", "storage": "256GB", "weight": "508g", "os": "HyperOS 2",
+        "chipset": "Snapdragon 8s Gen 3", "connectivity": ["WiFi 6E", "Bluetooth 5.4", "USB-C 3.2"], "color": "Black"
+      },
+      "tags": ["144Hz", "value", "stylus support"], "image": "https://via.placeholder.com/300x300?text=Xiaomi+Pad+7+Pro"
+    },
+    {
+      "id": 38, "categoryId": 3, "name": "OnePlus Pad 3", "brand": "OnePlus",
+      "price": 599, "rating": 4.5, "reviews": 540, "inStock": true,
+      "specs": {
+        "display": "12.1\" LTPO AMOLED 144Hz", "battery": "9510mAh", "camera": "13MP + 8MP front",
+        "ram": "12GB", "storage": "256GB", "weight": "580g", "os": "OxygenOS 15",
+        "chipset": "Snapdragon 8 Gen 3", "connectivity": ["WiFi 7", "Bluetooth 5.4", "USB-C 3.2"], "color": "Nimbus Grey"
+      },
+      "tags": ["AMOLED", "144Hz", "stylus"], "image": "https://via.placeholder.com/300x300?text=OnePlus+Pad+3"
+    },
+    {
+      "id": 39, "categoryId": 3, "name": "Huawei MatePad Pro 12", "brand": "Huawei",
+      "price": 699, "rating": 4.4, "reviews": 420, "inStock": true,
+      "specs": {
+        "display": "12.2\" OLED 2.5K 120Hz", "battery": "10100mAh", "camera": "13MP + 8MP front",
+        "ram": "8GB", "storage": "256GB", "weight": "580g", "os": "HarmonyOS 4",
+        "chipset": "Kirin 9000S", "connectivity": ["WiFi 6E", "Bluetooth 5.2", "USB-C"], "color": "Space Gray"
+      },
+      "tags": ["OLED", "M-Pencil", "HarmonyOS"], "image": "https://via.placeholder.com/300x300?text=MatePad+Pro+12"
+    },
+    {
+      "id": 40, "categoryId": 3, "name": "Google Pixel Tablet 2", "brand": "Google",
+      "price": 599, "rating": 4.6, "reviews": 870, "inStock": true,
+      "specs": {
+        "display": "11\" IPS 2K 60Hz", "battery": "8hr", "camera": "8MP + 8MP front",
+        "ram": "8GB", "storage": "128GB", "weight": "489g", "os": "Android 15",
+        "chipset": "Google Tensor G3", "connectivity": ["WiFi 6E", "Bluetooth 5.3", "USB-C"], "color": "Porcelain"
+      },
+      "tags": ["dock included", "Hub Mode", "Google AI"], "image": "https://via.placeholder.com/300x300?text=Pixel+Tablet+2"
+    },
+    {
+      "id": 41, "categoryId": 3, "name": "iPad Mini 7", "brand": "Apple",
+      "price": 599, "rating": 4.8, "reviews": 2100, "inStock": true,
+      "specs": {
+        "display": "8.3\" Liquid Retina 60Hz", "battery": "10hr", "camera": "12MP + 12MP front",
+        "ram": "8GB", "storage": "128GB", "weight": "293g", "os": "iPadOS 18",
+        "chipset": "Apple A17 Pro", "connectivity": ["WiFi 6E", "Bluetooth 5.3", "USB-C"], "color": "Starlight"
+      },
+      "tags": ["compact", "A17 Pro", "Pencil Pro"], "image": "https://via.placeholder.com/300x300?text=iPad+Mini+7"
+    },
+    {
+      "id": 42, "categoryId": 3, "name": "Samsung Galaxy Tab A9+", "brand": "Samsung",
+      "price": 299, "rating": 4.3, "reviews": 1890, "inStock": true,
+      "specs": {
+        "display": "11\" LCD FHD 60Hz", "battery": "7040mAh", "camera": "8MP + 5MP front",
+        "ram": "4GB", "storage": "64GB", "weight": "480g", "os": "Android 14",
+        "chipset": "Snapdragon 695", "connectivity": ["WiFi 5", "Bluetooth 5.1", "USB-C"], "color": "Graphite"
+      },
+      "tags": ["budget", "kids", "entertainment"], "image": "https://via.placeholder.com/300x300?text=Galaxy+Tab+A9+"
+    },
+    {
+      "id": 43, "categoryId": 3, "name": "Asus ROG Flow Z13", "brand": "Asus",
+      "price": 1599, "rating": 4.6, "reviews": 380, "inStock": true,
+      "specs": {
+        "display": "13.4\" IPS 165Hz 1080p Touch", "battery": "8hr", "camera": "8MP + 5MP front",
+        "ram": "16GB", "storage": "512GB SSD", "weight": "1.18kg", "os": "Windows 11",
+        "chipset": "Intel Core i9-13900H", "gpu": "NVIDIA RTX 4060", "connectivity": ["WiFi 6E", "Bluetooth 5.3", "Thunderbolt 4"], "color": "Black"
+      },
+      "tags": ["Gaming", "2-in-1", "detachable"], "image": "https://via.placeholder.com/300x300?text=ROG+Flow+Z13"
+    },
+    {
+      "id": 44, "categoryId": 3, "name": "Realme Pad 2 Pro", "brand": "Realme",
+      "price": 349, "rating": 4.3, "reviews": 430, "inStock": true,
+      "specs": {
+        "display": "11.5\" LCD 2K 120Hz", "battery": "8360mAh", "camera": "13MP + 8MP front",
+        "ram": "8GB", "storage": "128GB", "weight": "470g", "os": "realme UI 5",
+        "chipset": "Snapdragon 695", "connectivity": ["WiFi 6", "Bluetooth 5.1", "USB-C"], "color": "Black"
+      },
+      "tags": ["budget", "120Hz", "stylus support"], "image": "https://via.placeholder.com/300x300?text=Realme+Pad+2+Pro"
+    },
+    {
+      "id": 45, "categoryId": 3, "name": "Oppo Pad 3 Pro", "brand": "Oppo",
+      "price": 649, "rating": 4.4, "reviews": 280, "inStock": false,
+      "specs": {
+        "display": "12.1\" OLED 3K 144Hz", "battery": "9510mAh", "camera": "13MP + 8MP front",
+        "ram": "12GB", "storage": "256GB", "weight": "577g", "os": "ColorOS 14",
+        "chipset": "Snapdragon 8 Gen 3", "connectivity": ["WiFi 7", "Bluetooth 5.4", "USB-C 3.2"], "color": "Blue"
+      },
+      "tags": ["OLED", "Stylus", "144Hz"], "image": "https://via.placeholder.com/300x300?text=Oppo+Pad+3+Pro"
+    },
+
+    {
+      "id": 46, "categoryId": 4, "name": "Sony A7R V", "brand": "Sony",
+      "price": 3899, "rating": 4.9, "reviews": 1240, "inStock": true,
+      "specs": {
+        "sensor": "61MP Full Frame BSI-CMOS", "display": "3.2\" OLED Tilting Touch", "battery": "530 shots / charge",
+        "video": "8K 25fps / 4K 120fps", "af": "759-point Phase Detection AI AF",
+        "weight": "723g (body)", "storage": "Dual CFexpress A + SD", "stabilization": "8-stop IBIS",
+        "mount": "Sony E-Mount", "weather_sealed": true, "color": "Black"
+      },
+      "tags": ["Full Frame", "61MP", "8K Video", "IBIS"], "image": "https://via.placeholder.com/300x300?text=Sony+A7R+V"
+    },
+    {
+      "id": 47, "categoryId": 4, "name": "Canon EOS R5 Mark II", "brand": "Canon",
+      "price": 4299, "rating": 4.9, "reviews": 980, "inStock": true,
+      "specs": {
+        "sensor": "45MP Full Frame CMOS", "display": "3.2\" Vari-angle Touch LCD", "battery": "760 shots / charge",
+        "video": "8K RAW / 4K 120fps", "af": "Dual Pixel CMOS AF II",
+        "weight": "746g (body)", "storage": "CFexpress B + SD", "stabilization": "8-stop IBIS + lens IS",
+        "mount": "Canon RF Mount", "weather_sealed": true, "color": "Black"
+      },
+      "tags": ["Full Frame", "45MP", "8K RAW", "IBIS"], "image": "https://via.placeholder.com/300x300?text=Canon+EOS+R5+II"
+    },
+    {
+      "id": 48, "categoryId": 4, "name": "Nikon Z9", "brand": "Nikon",
+      "price": 5499, "rating": 4.8, "reviews": 680, "inStock": true,
+      "specs": {
+        "sensor": "45.7MP Full Frame Stacked CMOS", "display": "3.2\" Tiltable Touch LCD", "battery": "750 shots / charge",
+        "video": "8K 60fps / 4K 120fps", "af": "493-point Phase Detection",
+        "weight": "1340g (body)", "storage": "Dual CFexpress B", "stabilization": "6-stop IBIS",
+        "mount": "Nikon Z Mount", "weather_sealed": true, "color": "Black"
+      },
+      "tags": ["Pro", "Flagship", "8K 60fps", "no mechanical shutter"], "image": "https://via.placeholder.com/300x300?text=Nikon+Z9"
+    },
+    {
+      "id": 49, "categoryId": 4, "name": "Fujifilm X100VI", "brand": "Fujifilm",
+      "price": 1599, "rating": 4.9, "reviews": 1870, "inStock": false,
+      "specs": {
+        "sensor": "40MP APS-C X-Trans CMOS 5 HR", "display": "3\" Tilt Touch LCD + Hybrid OVF/EVF", "battery": "310 shots / charge",
+        "video": "4K 60fps", "af": "Phase Detection",
+        "weight": "521g", "storage": "SD", "stabilization": "6-stop IBIS",
+        "mount": "Fixed 23mm f/2", "weather_sealed": true, "color": "Black"
+      },
+      "tags": ["compact", "Film Simulation", "street", "IBIS"], "image": "https://via.placeholder.com/300x300?text=Fujifilm+X100VI"
+    },
+    {
+      "id": 50, "categoryId": 4, "name": "OM System OM-5 II", "brand": "OM System",
+      "price": 1299, "rating": 4.7, "reviews": 540, "inStock": true,
+      "specs": {
+        "sensor": "20MP Micro Four Thirds", "display": "3\" Articulating Touch LCD", "battery": "520 shots / charge",
+        "video": "4K 60fps", "af": "Contrast + Phase Detection",
+        "weight": "414g", "storage": "Dual SD", "stabilization": "7.5-stop IBIS",
+        "mount": "Micro Four Thirds", "weather_sealed": true, "color": "Black"
+      },
+      "tags": ["weather sealed", "compact", "adventure", "IBIS"], "image": "https://via.placeholder.com/300x300?text=OM+System+OM-5+II"
+    },
+    {
+      "id": 51, "categoryId": 4, "name": "Panasonic Lumix G9 II", "brand": "Panasonic",
+      "price": 1699, "rating": 4.7, "reviews": 620, "inStock": true,
+      "specs": {
+        "sensor": "25.2MP Micro Four Thirds", "display": "3\" Tilt Touch LCD", "battery": "680 shots / charge",
+        "video": "5.7K 60fps / 4K 120fps", "af": "Phase Hybrid AF 779-point",
+        "weight": "658g", "storage": "Dual SD", "stabilization": "8-stop IBIS",
+        "mount": "Micro Four Thirds", "weather_sealed": true, "color": "Black"
+      },
+      "tags": ["Phase AF", "IBIS", "video", "sports"], "image": "https://via.placeholder.com/300x300?text=Lumix+G9+II"
+    },
+    {
+      "id": 52, "categoryId": 4, "name": "Leica Q3", "brand": "Leica",
+      "price": 5995, "rating": 4.9, "reviews": 340, "inStock": true,
+      "specs": {
+        "sensor": "60MP Full Frame BSI-CMOS", "display": "3.2\" Touch LCD", "battery": "380 shots / charge",
+        "video": "8K 30fps", "af": "Contrast Detection + AI",
+        "weight": "743g", "storage": "SD", "stabilization": "None",
+        "mount": "Fixed Summilux 28mm f/1.7 ASPH", "weather_sealed": true, "color": "Black"
+      },
+      "tags": ["luxury", "fixed lens", "60MP", "8K"], "image": "https://via.placeholder.com/300x300?text=Leica+Q3"
+    },
+    {
+      "id": 53, "categoryId": 4, "name": "GoPro Hero 13 Black", "brand": "GoPro",
+      "price": 399, "rating": 4.7, "reviews": 3200, "inStock": true,
+      "specs": {
+        "sensor": "27MP 1/1.9\" CMOS", "display": "2.27\" Rear + 1.4\" Front Touch", "battery": "1.5hr (Enduro)",
+        "video": "5.3K 60fps / 4K 120fps", "af": "Fixed f/2.8 HyperSmooth",
+        "weight": "154g", "storage": "microSD", "stabilization": "HyperSmooth 6.0",
+        "mount": "GoPro Mounting", "weather_sealed": true, "color": "Black"
+      },
+      "tags": ["action", "waterproof", "HyperSmooth", "5.3K"], "image": "https://via.placeholder.com/300x300?text=GoPro+Hero+13"
+    },
+    {
+      "id": 54, "categoryId": 4, "name": "DJI Osmo Pocket 3", "brand": "DJI",
+      "price": 519, "rating": 4.8, "reviews": 2100, "inStock": true,
+      "specs": {
+        "sensor": "1\" CMOS", "display": "2\" OLED Rotating Touch", "battery": "166 min",
+        "video": "4K 120fps", "af": "PDAF + CDAF",
+        "weight": "179g", "storage": "microSD", "stabilization": "3-axis mechanical gimbal",
+        "mount": "DJI Mini Tripod", "weather_sealed": false, "color": "Black"
+      },
+      "tags": ["gimbal", "vlog", "1-inch sensor", "4K 120fps"], "image": "https://via.placeholder.com/300x300?text=DJI+Osmo+Pocket+3"
+    },
+    {
+      "id": 55, "categoryId": 4, "name": "Sony ZV-E10 II", "brand": "Sony",
+      "price": 899, "rating": 4.6, "reviews": 980, "inStock": true,
+      "specs": {
+        "sensor": "26MP APS-C Exmor R CMOS", "display": "3\" Vari-angle LCD", "battery": "440 shots / charge",
+        "video": "4K 60fps", "af": "759-point Phase Detection",
+        "weight": "317g", "storage": "SD / CFexpress A", "stabilization": "Electronic + Active",
+        "mount": "Sony E-Mount", "weather_sealed": false, "color": "Black"
+      },
+      "tags": ["vlog", "APS-C", "AI AF", "4K 60fps"], "image": "https://via.placeholder.com/300x300?text=Sony+ZV-E10+II"
+    },
+    {
+      "id": 56, "categoryId": 4, "name": "Ricoh GR IIIx", "brand": "Ricoh",
+      "price": 999, "rating": 4.8, "reviews": 780, "inStock": true,
+      "specs": {
+        "sensor": "24.2MP APS-C CMOS", "display": "3\" Fixed LCD", "battery": "200 shots / charge",
+        "video": "Full HD 60fps", "af": "Contrast Detection",
+        "weight": "262g", "storage": "SD", "stabilization": "Sensor-shift",
+        "mount": "Fixed 40mm f/2.8 GR Lens", "weather_sealed": false, "color": "Black"
+      },
+      "tags": ["street", "pocketable", "APS-C", "compact"], "image": "https://via.placeholder.com/300x300?text=Ricoh+GR+IIIx"
+    },
+    {
+      "id": 57, "categoryId": 4, "name": "Canon PowerShot V10", "brand": "Canon",
+      "price": 449, "rating": 4.5, "reviews": 1200, "inStock": true,
+      "specs": {
+        "sensor": "20MP 1\" CMOS", "display": "2\" Fixed LCD (selfie tilt)", "battery": "260 shots / charge",
+        "video": "4K 30fps", "af": "Dual Pixel CMOS AF",
+        "weight": "211g", "storage": "SD", "stabilization": "Movie Digital IS",
+        "mount": "Fixed 19mm f/2.8", "weather_sealed": false, "color": "Silver"
+      },
+      "tags": ["vlog", "compact", "live streaming", "1-inch"], "image": "https://via.placeholder.com/300x300?text=Canon+V10"
+    },
+    {
+      "id": 58, "categoryId": 4, "name": "Nikon Z50 II", "brand": "Nikon",
+      "price": 999, "rating": 4.6, "reviews": 540, "inStock": true,
+      "specs": {
+        "sensor": "20.9MP APS-C CMOS", "display": "3\" Tiltable Touch LCD", "battery": "300 shots / charge",
+        "video": "4K 30fps", "af": "Phase Detection AF",
+        "weight": "477g", "storage": "SD", "stabilization": "None (lens IS)",
+        "mount": "Nikon Z DX", "weather_sealed": false, "color": "Black"
+      },
+      "tags": ["APS-C", "beginner", "Z-mount", "compact mirrorless"], "image": "https://via.placeholder.com/300x300?text=Nikon+Z50+II"
+    },
+    {
+      "id": 59, "categoryId": 4, "name": "Sigma FP II", "brand": "Sigma",
+      "price": 2999, "rating": 4.7, "reviews": 280, "inStock": true,
+      "specs": {
+        "sensor": "61MP Full Frame BSI-CMOS", "display": "3.15\" Touch LCD", "battery": "200 shots / charge",
+        "video": "12-bit CinemaDNG RAW", "af": "Contrast Detection",
+        "weight": "422g", "storage": "CFexpress B", "stabilization": "None",
+        "mount": "Leica L-Mount", "weather_sealed": false, "color": "Black"
+      },
+      "tags": ["smallest FF", "cinematic", "61MP", "RAW Video"], "image": "https://via.placeholder.com/300x300?text=Sigma+FP+II"
+    },
+    {
+      "id": 60, "categoryId": 4, "name": "Insta360 X5", "brand": "Insta360",
+      "price": 549, "rating": 4.7, "reviews": 1560, "inStock": true,
+      "specs": {
+        "sensor": "Dual 1/2\" CMOS 360°", "display": "2.5\" Touch", "battery": "105 min",
+        "video": "8K 360° 30fps / 4K Wide 60fps", "af": "Fixed Wide",
+        "weight": "203g", "storage": "microSD", "stabilization": "FlowState",
+        "mount": "Insta360 Standard", "weather_sealed": true, "color": "Black"
+      },
+      "tags": ["360°", "action", "8K", "waterproof"], "image": "https://via.placeholder.com/300x300?text=Insta360+X5"
+    },
+
+    {
+      "id": 61, "categoryId": 5, "name": "Sony WH-1000XM6", "brand": "Sony",
+      "price": 399, "rating": 4.9, "reviews": 4200, "inStock": true,
+      "specs": {
+        "type": "Over-ear headphones", "driver": "30mm dynamic", "battery": "30hr (ANC on) / 40hr (off)",
+        "anc": "Auto Optimizing ANC", "weight": "254g", "connectivity": "Bluetooth 5.3 / 3.5mm",
+        "codec": ["LDAC", "LHDC", "AAC", "SBC"], "charging": "USB-C 3hr / 3min = 3hr",
+        "microphones": "8 mics", "foldable": true, "color": "Black"
+      },
+      "tags": ["ANC", "flagship", "LDAC", "long battery"], "image": "https://via.placeholder.com/300x300?text=Sony+WH-1000XM6"
+    },
+    {
+      "id": 62, "categoryId": 5, "name": "Bose QuietComfort 45", "brand": "Bose",
+      "price": 329, "rating": 4.8, "reviews": 3800, "inStock": true,
+      "specs": {
+        "type": "Over-ear headphones", "driver": "40mm dynamic", "battery": "24hr",
+        "anc": "Quiet Mode + Aware Mode", "weight": "240g", "connectivity": "Bluetooth 5.1 / 2.5mm",
+        "codec": ["AAC", "SBC"], "charging": "USB-C 2.5hr",
+        "microphones": "4 mics", "foldable": true, "color": "Black"
+      },
+      "tags": ["ANC", "comfort", "Bose signature"], "image": "https://via.placeholder.com/300x300?text=Bose+QC45"
+    },
+    {
+      "id": 63, "categoryId": 5, "name": "Apple AirPods Pro 3", "brand": "Apple",
+      "price": 249, "rating": 4.9, "reviews": 6100, "inStock": true,
+      "specs": {
+        "type": "True Wireless In-ear", "driver": "Custom Apple driver", "battery": "6hr + 24hr (case) = 30hr total",
+        "anc": "H2 chip ANC + Transparency + Adaptive Audio", "weight": "5.3g each",
+        "connectivity": "Bluetooth 5.3", "codec": ["AAC", "Apple Lossless (Apple devices)"],
+        "charging": "MagSafe / USB-C / Qi2", "microphones": "4 mics per bud", "foldable": false, "color": "White"
+      },
+      "tags": ["ANC", "TWS", "MagSafe", "Hearing Aid mode"], "image": "https://via.placeholder.com/300x300?text=AirPods+Pro+3"
+    },
+    {
+      "id": 64, "categoryId": 5, "name": "Sennheiser Momentum 4", "brand": "Sennheiser",
+      "price": 379, "rating": 4.8, "reviews": 1640, "inStock": true,
+      "specs": {
+        "type": "Over-ear headphones", "driver": "42mm dynamic", "battery": "60hr",
+        "anc": "Adjustable ANC 3-level", "weight": "293g", "connectivity": "Bluetooth 5.2 / 2.5mm",
+        "codec": ["aptX HD", "aptX Adaptive", "AAC", "SBC"], "charging": "USB-C 2hr",
+        "microphones": "4 mics", "foldable": true, "color": "Black"
+      },
+      "tags": ["audiophile", "60hr battery", "aptX Adaptive"], "image": "https://via.placeholder.com/300x300?text=Sennheiser+Momentum+4"
+    },
+    {
+      "id": 65, "categoryId": 5, "name": "Samsung Galaxy Buds 3 Pro", "brand": "Samsung",
+      "price": 249, "rating": 4.6, "reviews": 2100, "inStock": true,
+      "specs": {
+        "type": "True Wireless In-ear", "driver": "10.5mm dynamic + planar tweeter", "battery": "6hr + 24hr (case) = 30hr total",
+        "anc": "Intelligent ANC", "weight": "5.5g each", "connectivity": "Bluetooth 5.4",
+        "codec": ["Samsung SSC Ultra", "Samsung SSC", "AAC", "SBC"], "charging": "USB-C / Qi wireless",
+        "microphones": "3 mics per bud", "foldable": false, "color": "Silver"
+      },
+      "tags": ["ANC", "TWS", "SSC Ultra", "Galaxy ecosystem"], "image": "https://via.placeholder.com/300x300?text=Galaxy+Buds+3+Pro"
+    },
+    {
+      "id": 66, "categoryId": 5, "name": "Jabra Evolve2 85", "brand": "Jabra",
+      "price": 449, "rating": 4.7, "reviews": 980, "inStock": true,
+      "specs": {
+        "type": "Over-ear headphones", "driver": "40mm dynamic", "battery": "37hr",
+        "anc": "Advanced Hybrid ANC 10 mics", "weight": "340g", "connectivity": "Bluetooth 5.0 / 3.5mm / USB-A dongle",
+        "codec": ["aptX Adaptive", "AAC", "SBC"], "charging": "USB-C / Qi wireless (charging stand incl.)",
+        "microphones": "10 mics (8 ANC + 2 call)", "foldable": true, "color": "Black"
+      },
+      "tags": ["Business", "ANC", "conference calls", "USB dongle"], "image": "https://via.placeholder.com/300x300?text=Jabra+Evolve2+85"
+    },
+    {
+      "id": 67, "categoryId": 5, "name": "Nothing Ear 2", "brand": "Nothing",
+      "price": 149, "rating": 4.6, "reviews": 1780, "inStock": true,
+      "specs": {
+        "type": "True Wireless In-ear", "driver": "11.6mm dynamic", "battery": "6.3hr + 30hr (case) = 36hr total",
+        "anc": "Adaptive ANC -45dB", "weight": "4.5g each", "connectivity": "Bluetooth 5.3",
+        "codec": ["LHDC 5.0", "AAC", "SBC"], "charging": "USB-C / Qi wireless",
+        "microphones": "3 mics per bud", "foldable": false, "color": "White"
+      },
+      "tags": ["ANC", "TWS", "value", "LHDC 5.0"], "image": "https://via.placeholder.com/300x300?text=Nothing+Ear+2"
+    },
+    {
+      "id": 68, "categoryId": 5, "name": "Anker Soundcore Liberty 4 NC", "brand": "Anker",
+      "price": 99, "rating": 4.5, "reviews": 3400, "inStock": true,
+      "specs": {
+        "type": "True Wireless In-ear", "driver": "11mm dynamic", "battery": "10hr + 40hr (case) = 50hr total",
+        "anc": "Adaptive ANC 2.0", "weight": "5.6g each", "connectivity": "Bluetooth 5.3",
+        "codec": ["LDAC", "AAC", "SBC"], "charging": "USB-C / Qi wireless",
+        "microphones": "6 mics", "foldable": false, "color": "Black"
+      },
+      "tags": ["budget", "ANC", "TWS", "LDAC", "50hr"], "image": "https://via.placeholder.com/300x300?text=Soundcore+Liberty+4+NC"
+    },
+    {
+      "id": 69, "categoryId": 5, "name": "JBL Tour Pro 3", "brand": "JBL",
+      "price": 249, "rating": 4.7, "reviews": 1240, "inStock": true,
+      "specs": {
+        "type": "True Wireless In-ear", "driver": "10mm dynamic", "battery": "10hr + 30hr (case) = 40hr total",
+        "anc": "True Adaptive ANC", "weight": "6.1g each", "connectivity": "Bluetooth 5.3",
+        "codec": ["LC3plus", "aptX Adaptive", "AAC", "SBC"], "charging": "Smart Charging Case (2.8\" touch display)",
+        "microphones": "6 mics", "foldable": false, "color": "Black"
+      },
+      "tags": ["smart case display", "TWS", "ANC", "aptX Adaptive"], "image": "https://via.placeholder.com/300x300?text=JBL+Tour+Pro+3"
+    },
+    {
+      "id": 70, "categoryId": 5, "name": "Sony WF-1000XM6", "brand": "Sony",
+      "price": 299, "rating": 4.8, "reviews": 2800, "inStock": true,
+      "specs": {
+        "type": "True Wireless In-ear", "driver": "8.4mm dynamic", "battery": "8hr + 28hr (case) = 36hr total",
+        "anc": "Integrated Processor V2 ANC", "weight": "5.9g each", "connectivity": "Bluetooth 5.3",
+        "codec": ["LDAC", "LC3", "AAC", "SBC"], "charging": "USB-C / Qi wireless",
+        "microphones": "5 mics per bud (AI noise cancelling)", "foldable": false, "color": "Black"
+      },
+      "tags": ["ANC", "TWS", "flagship", "LDAC"], "image": "https://via.placeholder.com/300x300?text=Sony+WF-1000XM6"
+    },
+    {
+      "id": 71, "categoryId": 5, "name": "Bowers & Wilkins Px8", "brand": "Bowers & Wilkins",
+      "price": 699, "rating": 4.8, "reviews": 580, "inStock": true,
+      "specs": {
+        "type": "Over-ear headphones", "driver": "40mm Carbon Cone", "battery": "30hr",
+        "anc": "Adaptive ANC", "weight": "307g", "connectivity": "Bluetooth 5.2 / USB-C audio",
+        "codec": ["aptX Adaptive", "AAC", "SBC"], "charging": "USB-C 2hr",
+        "microphones": "6 mics", "foldable": false, "color": "Midnight Blue"
+      },
+      "tags": ["luxury", "audiophile", "aptX Adaptive", "leather"], "image": "https://via.placeholder.com/300x300?text=B%26W+Px8"
+    },
+    {
+      "id": 72, "categoryId": 5, "name": "Marshall Emberton III", "brand": "Marshall",
+      "price": 149, "rating": 4.7, "reviews": 2400, "inStock": true,
+      "specs": {
+        "type": "Portable Bluetooth Speaker", "driver": "Full-range stereo + passive radiators", "battery": "30hr",
+        "anc": "N/A", "weight": "780g", "connectivity": "Bluetooth 5.3",
+        "codec": ["AAC", "SBC"], "charging": "USB-C",
+        "waterproof": "IPX7", "color": "Black & Brass"
+      },
+      "tags": ["speaker", "portable", "IPX7", "30hr"], "image": "https://via.placeholder.com/300x300?text=Marshall+Emberton+III"
+    },
+    {
+      "id": 73, "categoryId": 5, "name": "Sonos Era 300", "brand": "Sonos",
+      "price": 449, "rating": 4.7, "reviews": 1120, "inStock": true,
+      "specs": {
+        "type": "Smart Home Speaker", "driver": "6-driver array (2 tweeters, 4 woofers)", "battery": "N/A (wired)",
+        "anc": "N/A", "weight": "4.47kg", "connectivity": "WiFi 6 / Bluetooth 5.0 / Apple AirPlay 2",
+        "codec": ["Dolby Atmos", "Spatial Audio"], "charging": "AC Power",
+        "waterproof": "No", "color": "Black"
+      },
+      "tags": ["Dolby Atmos", "smart speaker", "spatial audio", "Sonos ecosystem"], "image": "https://via.placeholder.com/300x300?text=Sonos+Era+300"
+    },
+    {
+      "id": 74, "categoryId": 5, "name": "Harman Kardon Aura Studio 4", "brand": "Harman Kardon",
+      "price": 299, "rating": 4.6, "reviews": 640, "inStock": true,
+      "specs": {
+        "type": "Home Bluetooth Speaker", "driver": "360° omnidirectional", "battery": "N/A (wired)",
+        "anc": "N/A", "weight": "2.4kg", "connectivity": "Bluetooth 5.0",
+        "codec": ["AAC", "SBC"], "charging": "AC Power",
+        "waterproof": "No", "color": "Black"
+      },
+      "tags": ["360° sound", "home speaker", "design", "ambient light"], "image": "https://via.placeholder.com/300x300?text=HK+Aura+Studio+4"
+    },
+    {
+      "id": 75, "categoryId": 5, "name": "Shure MV7+", "brand": "Shure",
+      "price": 249, "rating": 4.8, "reviews": 1890, "inStock": true,
+      "specs": {
+        "type": "Podcast Microphone", "driver": "Dynamic cardioid capsule", "battery": "N/A (wired)",
+        "anc": "N/A", "weight": "440g", "connectivity": "USB-C + XLR dual output",
+        "codec": ["PCM 24-bit / 48kHz"], "charging": "N/A",
+        "waterproof": "No", "color": "Black"
+      },
+      "tags": ["podcast", "USB+XLR", "studio quality", "MOTIV app"], "image": "https://via.placeholder.com/300x300?text=Shure+MV7+"
+    }
+  ]
+}
