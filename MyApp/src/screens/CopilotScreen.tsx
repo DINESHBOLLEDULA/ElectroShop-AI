@@ -10,7 +10,7 @@ import { useCompare } from '../context/CompareContext';
 import GradientBackground from '../components/GradientBackground';
 
 const { width } = Dimensions.get('window');
-const API_BASE = 'http://192.168.29.222:3000';
+const API_BASE = 'http://192.168.29.222:8000';
 
 // ─── Types ───
 interface ChatMessage {
@@ -22,15 +22,24 @@ interface ChatMessage {
 
 // ─── Mock AI responses for Discover ───
 const DISCOVER_RESPONSES: Record<string, { text: string; query: string }> = {
-  'phone': { text: "Here are the top smartphones I'd recommend:", query: 'products?categoryId=1&_limit=6' },
-  'laptop': { text: "Check out these amazing laptops:", query: 'products?categoryId=2&_limit=6' },
-  'tablet': { text: "Here are the best tablets for you:", query: 'products?categoryId=3&_limit=6' },
-  'camera': { text: "Great camera picks for you:", query: 'products?categoryId=4&_limit=6' },
-  'audio': { text: "Here are top audio products:", query: 'products?categoryId=5&_limit=6' },
-  'headphone': { text: "Check out these headphones:", query: 'products?categoryId=5&_limit=6' },
-  'gaming': { text: "Here are the best gaming devices:", query: 'products?tags_like=Gaming&_limit=6' },
-  'budget': { text: "Great value picks under budget:", query: 'products?tags_like=budget&_limit=6' },
-  'flagship': { text: "Premium flagship products:", query: 'products?tags_like=flagship&_limit=6' },
+  'phone': { text: "Here are the top smartphones I'd recommend:", query:
+'products/category/1' },
+  'laptop': { text: "Check out these amazing laptops:", query:
+'products/category/2' },
+  'tablet': { text: "Here are the best tablets for you:",query:
+'products/category/3'},
+  'camera': { text: "Great camera picks for you:", query:
+'products/category/4' },
+  'audio': { text: "Here are top audio products:", query:
+'products/category/5' },
+  'headphone': { text: "Check out these headphones:", query:
+'products/category/1' },
+  'gaming': { text: "Here are the best gaming devices:",query:
+'products/category/1' },
+  'budget': { text: "Great value picks under budget:", query:
+'products/category/1' },
+  'flagship': { text: "Premium flagship products:",query:
+'products/category/1' },
 };
 
 function matchQuery(input: string): { text: string; query: string } {

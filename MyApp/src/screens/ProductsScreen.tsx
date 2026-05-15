@@ -9,6 +9,7 @@ import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
 import { useTheme } from '../context/ThemeContext';
 import GradientBackground from '../components/GradientBackground';
+import { getProductsByCategory } from '../services/api';
 
 const { width } = Dimensions.get('window');
 const CARD_WIDTH = (width - 48) / 2;
@@ -28,16 +29,29 @@ export default function ProductsScreen({ route, navigation }: any) {
   const [priceRange,setPriceRange] =useState({min: 0,max: 10000,});
 
 
-  useEffect(() => {
-    
-    fetch(`http://192.168.29.222:3000/products?categoryId=${category.id}`)
-      .then(res => res.json())
-      .then(data => setProducts(data))
-      .finally(() => setLoading(false));
-  }, [colors,
-  isDark,
-  toggleTheme,
-  category.name,]);
+ useEffect(() => {
+  const loadProducts =
+    async () => {
+      try {
+        setLoading(true);
+
+        const data =
+          await getProductsByCategory(
+            category.id
+          );
+
+        setProducts(data);
+      } catch (error) {
+        console.log(
+          error
+        );
+      } finally {
+        setLoading(false);
+      }
+    };
+
+  loadProducts();
+}, [category.id]);
 
   if (loading) {
     return (

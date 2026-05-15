@@ -10,6 +10,7 @@ import { useWishlist } from '../context/WishlistContext';
 import { useTheme } from '../context/ThemeContext';
 import { Categorylist } from '../utils/CategoryList';
 import GradientBackground from '../components/GradientBackground';
+import { getProducts } from '../services/api';
 
 const { width } = Dimensions.get('window');
 const CARD_WIDTH = (width - 48) / 2;
@@ -57,11 +58,23 @@ export default function HomeScreen({ navigation }: any) {
 ];
 
   useEffect(() => {
-    fetch('http://192.168.29.222:3000/products')
-      .then(res => res.json())
-      .then(data => setProducts(data))
-      .catch(() => {});
-  }, []);
+  const loadProducts =
+    async () => {
+      try {
+        const data =
+          await getProducts();
+
+        setProducts(data);
+      } catch (error) {
+        console.log(
+          'Error loading products',
+          error
+        );
+      }
+    };
+
+  loadProducts();
+}, []);
 
   // Auto-scroll banners
   useEffect(() => {
