@@ -5,13 +5,26 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { CartProvider } from './src/context/CartContext';
 import { WishlistProvider } from './src/context/WishlistContext';
 import { CompareProvider } from './src/context/CompareContext';
-import { ThemeProvider, useTheme } from './src/context/ThemeContext';
+import {ThemeProvider,useTheme} from './src/context/ThemeContext';
+import Toast from 'react-native-toast-message';
+
+import { BackendProvider} from './src/context/BackendContext';
+import { toastConfig } from './src/components/CustomToast';
 
 function AppContent() {
-  const { isDark } = useTheme();
+  const { isDark } =
+    useTheme();
+
   return (
-    <>
-      <StatusBar style={isDark ? 'light' : 'dark'} />
+    <BackendProvider>
+      <StatusBar
+        style={
+          isDark
+            ? 'light'
+            : 'dark'
+        }
+      />
+
       <CompareProvider>
         <CartProvider>
           <WishlistProvider>
@@ -19,7 +32,10 @@ function AppContent() {
           </WishlistProvider>
         </CartProvider>
       </CompareProvider>
-    </>
+
+      {/* IMPORTANT */}
+      <Toast config={toastConfig}/>
+    </BackendProvider>
   );
 }
 

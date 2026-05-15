@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
+import { useBackend } from '../context/BackendContext';
 
 const { width, height } = Dimensions.get('window');
 
@@ -41,62 +42,120 @@ export default function SplashScreen({ navigation }: any) {
   const floatingAnim = useRef(new Animated.Value(0)).current;
   const dotAnim     = useRef(new Animated.Value(0)).current;
 
-  useEffect(() => {
-    // Intro
-    Animated.parallel([
-      Animated.spring(scaleAnim, {
-        toValue: 1,
-        friction: 5,
-        tension: 50,
+  const { isBackendConnected,isChecking,} = useBackend();
+
+ useEffect(() => {
+  // Intro animations
+  Animated.parallel([
+    Animated.spring(scaleAnim, {
+      toValue: 1,
+      friction: 5,
+      tension: 50,
+      useNativeDriver: true,
+    }),
+
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 900,
+      useNativeDriver: true,
+    }),
+  ]).start();
+
+  Animated.loop(
+    Animated.timing(orbitAnim, {
+      toValue: 1,
+      duration: 18000,
+      easing: Easing.linear,
+      useNativeDriver: true,
+    })
+  ).start();
+
+  Animated.loop(
+    Animated.sequence([
+      Animated.timing(pulseAnim, {
+        toValue: 1.05,
+        duration: 1800,
         useNativeDriver: true,
       }),
-      Animated.timing(fadeAnim, {
+
+      Animated.timing(pulseAnim, {
         toValue: 1,
-        duration: 900,
+        duration: 1800,
         useNativeDriver: true,
       }),
-    ]).start();
+    ])
+  ).start();
 
-    // Slow orbit — drives the whole ring rotation
-    Animated.loop(
-      Animated.timing(orbitAnim, {
+  Animated.loop(
+    Animated.sequence([
+      Animated.timing(floatingAnim, {
         toValue: 1,
-        duration: 18000,
-        easing: Easing.linear,
+        duration: 2500,
+        easing:
+          Easing.inOut(
+            Easing.ease
+          ),
         useNativeDriver: true,
-      })
-    ).start();
+      }),
 
-    // Breathing logo
-    Animated.loop(
-      Animated.sequence([
-        Animated.timing(pulseAnim, { toValue: 1.05, duration: 1800, useNativeDriver: true }),
-        Animated.timing(pulseAnim, { toValue: 1,    duration: 1800, useNativeDriver: true }),
-      ])
-    ).start();
+      Animated.timing(floatingAnim, {
+        toValue: 0,
+        duration: 2500,
+        easing:
+          Easing.inOut(
+            Easing.ease
+          ),
+        useNativeDriver: true,
+      }),
+    ])
+  ).start();
 
-    // Floating (applied only to the center logo — not the orbit)
-    Animated.loop(
-      Animated.sequence([
-        Animated.timing(floatingAnim, { toValue: 1, duration: 2500, easing: Easing.inOut(Easing.ease), useNativeDriver: true }),
-        Animated.timing(floatingAnim, { toValue: 0, duration: 2500, easing: Easing.inOut(Easing.ease), useNativeDriver: true }),
-      ])
-    ).start();
+  Animated.loop(
+    Animated.sequence([
+      Animated.timing(dotAnim, {
+        toValue: 1,
+        duration: 700,
+        useNativeDriver: true,
+      }),
 
-    // Loading dots
-    Animated.loop(
-      Animated.sequence([
-        Animated.timing(dotAnim, { toValue: 1, duration: 700, useNativeDriver: true }),
-        Animated.timing(dotAnim, { toValue: 0, duration: 700, useNativeDriver: true }),
-      ])
-    ).start();
+      Animated.timing(dotAnim, {
+        toValue: 0,
+        duration: 700,
+        useNativeDriver: true,
+      }),
+    ])
+  ).start();
+}, []);
 
-    const timer = setTimeout(() => {
-      navigation.replace('Onboarding');
-    }, 3200);
+useEffect(() => {
+  let timer: any;
 
-    return () => clearTimeout(timer);
-  }, []);
+  // backend check finished
+  if (!isChecking) {
+    timer = setTimeout(() => {
+      navigation.replace(
+        'Onboarding'
+      );
+    }, 1200);
+  }
+
+  // fallback:
+  // if fetch hangs forever
+  const fallback =
+    setTimeout(() => {
+      navigation.replace(
+        'Onboarding'
+      );
+    }, 5000);
+
+  return () => {
+    clearTimeout(timer);
+    clearTimeout(fallback);
+  };
+}, [
+  isChecking,
+  navigation,
+]);
 
   // The whole orbit ring (icons + ring border) rotates as one unit
   const orbitRotate = orbitAnim.interpolate({
@@ -226,6 +285,30 @@ export default function SplashScreen({ navigation }: any) {
       </View>
 
       <Text style={styles.loadingText}>Loading smart experience...</Text>
+
+      <View style={styles.backendStatus}>
+  <View
+    style={[
+      styles.statusDot,
+      {
+        backgroundColor:
+          isChecking
+            ? '#F59E0B'
+            : isBackendConnected
+            ? '#22C55E'
+            : '#EF4444',
+      },
+    ]}
+  />
+
+  <Text style={styles.statusText}>
+    {isChecking
+      ? 'Checking Backend...'
+      : isBackendConnected
+      ? 'Backend Connected'
+      : 'Backend Offline'}
+  </Text>
+</View>
     </LinearGradient>
   );
 }
@@ -383,4 +466,23 @@ const styles = StyleSheet.create({
     backgroundColor: '#D8B4E2',
     opacity: 0.4,
   },
+  backendStatus: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  alignSelf: 'center',
+  marginTop: 20,
+},
+
+statusDot: {
+  width: 10,
+  height: 10,
+  borderRadius: 999,
+  marginRight: 8,
+},
+
+statusText: {
+  fontSize: 14,
+  fontWeight: '600',
+  color: '#1F2937',
+},
 });

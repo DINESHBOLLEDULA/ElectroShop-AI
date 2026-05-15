@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useBackend } from '../context/BackendContext';
 
 const { width, height } = Dimensions.get('window');
 
@@ -44,6 +45,7 @@ const SLIDES = [
 export default function OnboardingScreen({ navigation }: any) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const flatListRef = useRef<FlatList>(null);
+  const {isBackendConnected,}=useBackend();
 
   const nextSlide = () => {
     if (currentIndex < SLIDES.length - 1) {
