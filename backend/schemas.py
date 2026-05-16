@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from pydantic import ConfigDict
-
+from typing import List, Optional
 
 class ProductResponse(
     BaseModel
@@ -20,3 +20,11 @@ class ProductResponse(
     model_config = ConfigDict(
         from_attributes=True
     )
+
+class CopilotChatRequest(BaseModel):
+    query: str
+
+
+class CopilotChatResponse(BaseModel):
+    message: str
+    products: List[ProductResponse] = []

@@ -20,35 +20,8 @@ interface ChatMessage {
   products?: any[];
 }
 
-// ─── Mock AI responses for Discover ───
-const DISCOVER_RESPONSES: Record<string, { text: string; query: string }> = {
-  'phone': { text: "Here are the top smartphones I'd recommend:", query:
-'products/category/1' },
-  'laptop': { text: "Check out these amazing laptops:", query:
-'products/category/2' },
-  'tablet': { text: "Here are the best tablets for you:",query:
-'products/category/3'},
-  'camera': { text: "Great camera picks for you:", query:
-'products/category/4' },
-  'audio': { text: "Here are top audio products:", query:
-'products/category/5' },
-  'headphone': { text: "Check out these headphones:", query:
-'products/category/1' },
-  'gaming': { text: "Here are the best gaming devices:",query:
-'products/category/1' },
-  'budget': { text: "Great value picks under budget:", query:
-'products/category/1' },
-  'flagship': { text: "Premium flagship products:",query:
-'products/category/1' },
-};
 
-function matchQuery(input: string): { text: string; query: string } {
-  const lower = input.toLowerCase();
-  for (const [key, val] of Object.entries(DISCOVER_RESPONSES)) {
-    if (lower.includes(key)) return val;
-  }
-  return { text: "Here are some products you might like:", query: 'products?_limit=8' };
-}
+
 
 // ─── AI Comparison Generator ───
 function generateComparisonTable(products: any[]): string[][] {
@@ -140,27 +113,90 @@ export default function CopilotScreen() {
     }
   }, [mode, compareItems]);
 
-  // ─── Discover send ───
-  const handleDiscoverSend = async () => {
-    if (!input.trim() || loading) return;
-    const userMsg: ChatMessage = { id: Date.now().toString(), role: 'user', text: input.trim() };
-    setMessages(prev => [...prev, userMsg]);
-    setInput('');
-    setLoading(true);
-    try {
-      const match = matchQuery(input);
-      const res = await fetch(`${API_BASE}/${match.query}`);
-      const products = await res.json();
-      const aiMsg: ChatMessage = {
-        id: (Date.now() + 1).toString(), role: 'assistant',
-        text: match.text, products: Array.isArray(products) ? products : [],
-      };
-      setMessages(prev => [...prev, aiMsg]);
-    } catch {
-      setMessages(prev => [...prev, { id: (Date.now() + 1).toString(), role: 'assistant', text: 'Sorry, I had trouble fetching products. Please try again!' }]);
-    }
-    setLoading(false);
+  const handleDiscoverSend = async (
+  forcedQuery?: string | null
+) => {
+  const query =
+    typeof forcedQuery === 'string'
+      ? forcedQuery.trim()
+      : input.trim();
+
+  if (!query || loading) return;
+
+  const userMsg: ChatMessage = {
+    id: Date.now().toString(),
+    role: 'user',
+    text: query,
   };
+
+  setMessages(prev => [
+    ...prev,
+    userMsg,
+  ]);
+
+  setInput('');
+  setLoading(true);
+
+  try {
+    const res = await fetch(
+      `${API_BASE}/copilot/chat`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type':
+            'application/json',
+        },
+        body: JSON.stringify({
+          query,
+        }),
+      }
+    );
+
+    if (!res.ok) {
+      throw new Error(
+        'Backend request failed'
+      );
+    }
+
+    const data = await res.json();
+
+    const aiMsg: ChatMessage = {
+      id: (
+        Date.now() + 1
+      ).toString(),
+      role: 'assistant',
+      text:
+        data.message ??
+        'Here are some products',
+      products:
+        data.products ?? [],
+    };
+
+    setMessages(prev => [
+      ...prev,
+      aiMsg,
+    ]);
+  } catch (error) {
+    console.log(
+      'Copilot error:',
+      error
+    );
+
+    setMessages(prev => [
+      ...prev,
+      {
+        id: (
+          Date.now() + 1
+        ).toString(),
+        role: 'assistant',
+        text:
+          'Backend offline or request failed.',
+      },
+    ]);
+  } finally {
+    setLoading(false);
+  }
+};
 
   // ─── Compare follow-up ───
   const handleCompareSend = () => {
@@ -264,10 +300,24 @@ export default function CopilotScreen() {
     </ScrollView>
   );
 
-  // ─── Suggestion Chips ───
-  const suggestions = mode === 'discover'
-    ? ['Show me phones', 'Best laptops', 'Gaming devices', 'Top cameras', 'Audio gear']
-    : ['Which is better for gaming?', 'Best value pick?', 'Best camera?', 'Battery comparison'];
+const suggestions =
+  mode === 'discover'
+    ? [
+ 'Gaming phones',
+ 'Best laptops',
+ 'Camera products',
+ 'Wireless earbuds',
+ 'Phones',
+ 'Student laptops',
+ 'Audio gear',
+ 'Premium phones',
+]
+    : [
+        'Best for gaming?',
+        'Best value pick?',
+        'Best camera?',
+        'Battery comparison',
+      ];
 
   return (
     <GradientBackground>
@@ -356,15 +406,78 @@ export default function CopilotScreen() {
         </ScrollView>
       )}
 
-      {/* Suggestion Chips */}
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={s.suggestRow} contentContainerStyle={{ paddingHorizontal: 16, gap: 8 }}>
-        {suggestions.map((s2, i) => (
-          <TouchableOpacity key={i} style={[s.suggestChip, { backgroundColor: colors.primaryGlow, borderColor: colors.primary + '30' }]}
-            onPress={() => { setInput(s2); }}>
-            <Text style={[s.suggestText, { color: colors.primary }]}>{s2}</Text>
-          </TouchableOpacity>
-        ))}
-      </ScrollView>
+      <View style={s.suggestionSection}>
+  <View style={s.suggestionHeader}>
+    <Ionicons
+      name="sparkles"
+      size={14}
+      color={colors.primary}
+    />
+    <Text
+      style={[
+        s.suggestionTitle,
+        { color: colors.textMuted },
+      ]}
+    >
+      Try asking
+    </Text>
+  </View>
+
+  <ScrollView
+    horizontal
+    showsHorizontalScrollIndicator={false}
+    contentContainerStyle={
+      s.suggestionContainer
+    }
+  >
+    {suggestions.map((s2, i) => (
+      <TouchableOpacity
+        key={i}
+        activeOpacity={0.85}
+        disabled={loading}
+        style={[
+          s.aiChip,
+          {
+            backgroundColor:
+              colors.card,
+            borderColor:
+              colors.border,
+            opacity:
+              loading ? 0.5 : 1,
+          },
+        ]}
+        onPress={() => {
+          setInput(s2);
+
+          setTimeout(() => {
+            handleDiscoverSend(s2);
+          }, 50);
+        }}
+      >
+        <Text style={s.chipEmoji}>
+          {i === 0
+            ? '🎮'
+            : i === 1
+            ? '💰'
+            : i === 2
+            ? '📸'
+            : i === 3
+            ? '🎧'
+            : '✨'}
+        </Text>
+
+        <Text
+          style={[
+            s.aiChipText,
+            { color: colors.text },
+          ]}
+        >
+          {s2}
+        </Text>
+      </TouchableOpacity>
+    ))}
+  </ScrollView>
+</View>
 
       {/* Input Bar */}
       <View style={[s.inputBar, { backgroundColor: colors.bgSecondary, borderColor: colors.border }]}>
@@ -430,8 +543,13 @@ const s = StyleSheet.create({
   compareBtn: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 4, paddingVertical: 7, borderTopWidth: 1 },
   compareBtnText: { fontSize: 11, fontWeight: '700' },
   // Suggestions
-  suggestRow: { maxHeight: 44, marginBottom: 4 },
-  suggestChip: { paddingHorizontal: 14, paddingVertical: 8, borderRadius: 20, borderWidth: 1 },
+suggestRow: {
+  minHeight: 44,
+  maxHeight: 44,
+  marginBottom: 4,
+},
+  suggestChip: { paddingHorizontal: 14, paddingVertical: 8, borderRadius: 20, borderWidth: 1 , marginRight: 6,shadowOpacity: 0.08,
+elevation: 2},
   suggestText: { fontSize: 12, fontWeight: '600' },
   // Input
   inputBar: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 12, paddingTop: 8, paddingBottom: 80, borderTopWidth: 1, gap: 8 },
@@ -457,4 +575,49 @@ const s = StyleSheet.create({
   tableCellText: { fontSize: 11, lineHeight: 16 },
   tableLabelText: { fontWeight: '600' },
   tableHeaderText: { fontWeight: '800', fontSize: 12 },
+
+  suggestionSection: {
+  paddingTop: 10,
+  marginBottom: 8,
+},
+
+suggestionHeader: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  gap: 6,
+  paddingHorizontal: 16,
+  marginBottom: 10,
+},
+
+suggestionTitle: {
+  fontSize: 13,
+  fontWeight: '600',
+},
+
+suggestionContainer: {
+  paddingHorizontal: 16,
+  gap: 10,
+},
+
+aiChip: {
+  minWidth: 140,
+  paddingHorizontal: 14,
+  paddingVertical: 14,
+  borderRadius: 20,
+  borderWidth: 1,
+  flexDirection: 'row',
+  alignItems: 'center',
+  gap: 10,
+  elevation: 2,
+},
+
+chipEmoji: {
+  fontSize: 18,
+},
+
+aiChipText: {
+  fontSize: 13,
+  fontWeight: '700',
+  flexShrink: 1,
+},
 });
