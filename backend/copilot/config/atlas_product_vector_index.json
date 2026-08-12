@@ -1,0 +1,13 @@
+{
+  "fields": [
+    {
+      "type": "vector",
+      "path": "embedding",
+      "numDimensions": 768,
+      "similarity": "cosine"
+    },
+    { "type": "filter", "path": "category" },
+    { "type": "filter", "path": "brand" },
+    { "type": "filter", "path": "in_stock" }
+  ]
+}

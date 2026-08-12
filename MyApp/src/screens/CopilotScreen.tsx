@@ -8,9 +8,10 @@ import { FontAwesome5, Ionicons, MaterialCommunityIcons } from '@expo/vector-ico
 import { useTheme } from '../context/ThemeContext';
 import { useCompare } from '../context/CompareContext';
 import GradientBackground from '../components/GradientBackground';
+import { copilotApi, ConversationListItem, renderStreamingText } from '../services/copilotApi';
+import { useBackend } from '../context/BackendContext';
 
 const { width } = Dimensions.get('window');
-const API_BASE = 'http://192.168.29.222:8000';
 
 // ─── Types ───
 interface ChatMessage {
@@ -18,6 +19,8 @@ interface ChatMessage {
   role: 'user' | 'assistant';
   text: string;
   products?: any[];
+  failed?: boolean;
+  streaming?: boolean;
 }
 
 
@@ -74,6 +77,7 @@ function generateCompareVerdict(products: any[], question?: string): string {
 // ════════════════════════════════════════════════
 export default function CopilotScreen() {
   const { colors } = useTheme();
+  const { isBackendConnected, isChecking } = useBackend();
   const { items: compareItems, addToCompare, removeFromCompare, isInCompare, count: compareCount, clearCompare } = useCompare();
   const [mode, setMode] = useState<'discover' | 'compare'>('discover');
   const [messages, setMessages] = useState<ChatMessage[]>([
@@ -82,10 +86,76 @@ export default function CopilotScreen() {
   const [compareMessages, setCompareMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
+  const [typing, setTyping] = useState(false);
+  const [conversationId, setConversationId] = useState<string | null>(null);
+  const [conversations, setConversations] = useState<ConversationListItem[]>([]);
+  const [conversationSkip, setConversationSkip] = useState(0);
+  const [hasMoreConversations, setHasMoreConversations] = useState(true);
+  const [loadingConversations, setLoadingConversations] = useState(false);
+  const [lastFailedQuery, setLastFailedQuery] = useState<string | null>(null);
   const [compareTable, setCompareTable] = useState<string[][] | null>(null);
   const flatListRef = useRef<FlatList>(null);
   const compareFlatRef = useRef<FlatList>(null);
   const pulseAnim = useRef(new Animated.Value(1)).current;
+
+  const loadConversationList = async (reset = false) => {
+    if (!isBackendConnected) return;
+    if (loadingConversations || (!reset && !hasMoreConversations)) return;
+    setLoadingConversations(true);
+    try {
+      const skip = reset ? 0 : conversationSkip;
+      const page = await copilotApi.listConversations(skip);
+      setConversations(previous => reset ? page : [...previous, ...page]);
+      setConversationSkip(skip + page.length);
+      setHasMoreConversations(page.length === 20);
+      return page;
+    } finally {
+      setLoadingConversations(false);
+    }
+  };
+
+  const switchConversation = async (id: string) => {
+    if (!isBackendConnected || id === conversationId) return;
+    setLoading(true);
+    try {
+      const conversation = await copilotApi.loadConversation(id);
+      setConversationId(id);
+      setMessages(conversation.messages.map(message => ({
+        id: message.id,
+        role: message.role,
+        text: message.content,
+      })));
+      setLastFailedQuery(null);
+    } catch {
+      Alert.alert('Unable to load chat', 'Please try again when you are online.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const startNewConversation = async () => {
+    if (!isBackendConnected) return;
+    setLoading(true);
+    try {
+      const conversation = await copilotApi.createConversation();
+      setConversationId(conversation.id);
+      setMessages([{ id: 'welcome', role: 'assistant', text: "Hi! I'm your shopping copilot 🤖\nAsk me about phones, laptops, tablets, cameras, or audio gear!" }]);
+      setConversations(previous => [{ id: conversation.id, title: conversation.title, message_count: 0, updated_at: new Date().toISOString() }, ...previous]);
+    } catch {
+      Alert.alert('Unable to create chat', 'Please try again when the backend is available.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isChecking || !isBackendConnected) return;
+    void (async () => {
+      const page = await loadConversationList(true);
+      if (page?.[0]) await switchConversation(page[0].id);
+      else await startNewConversation();
+    })();
+  }, [isBackendConnected, isChecking]);
 
   useEffect(() => {
     if (compareCount > 0) {
@@ -113,90 +183,51 @@ export default function CopilotScreen() {
     }
   }, [mode, compareItems]);
 
-  const handleDiscoverSend = async (
-  forcedQuery?: string | null
-) => {
-  const query =
-    typeof forcedQuery === 'string'
-      ? forcedQuery.trim()
-      : input.trim();
-
-  if (!query || loading) return;
-
-  const userMsg: ChatMessage = {
-    id: Date.now().toString(),
-    role: 'user',
-    text: query,
-  };
-
-  setMessages(prev => [
-    ...prev,
-    userMsg,
-  ]);
-
-  setInput('');
-  setLoading(true);
-
-  try {
-    const res = await fetch(
-      `${API_BASE}/copilot/chat`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type':
-            'application/json',
-        },
-        body: JSON.stringify({
-          query,
-        }),
-      }
-    );
-
-    if (!res.ok) {
-      throw new Error(
-        'Backend request failed'
-      );
+  const handleDiscoverSend = async (forcedQuery?: string | null, skipPersistUser = false) => {
+    const query = typeof forcedQuery === 'string' ? forcedQuery.trim() : input.trim();
+    if (!query || loading || typing) return;
+    if (!isBackendConnected) {
+      setLastFailedQuery(query);
+      Alert.alert('You are offline', 'Reconnect to send this message.');
+      return;
     }
 
-    const data = await res.json();
+    const localUserId = `local-${Date.now()}`;
+    if (!skipPersistUser) setMessages(previous => [...previous, { id: localUserId, role: 'user', text: query }]);
+    setInput('');
+    setLoading(true);
+    setLastFailedQuery(null);
 
-    const aiMsg: ChatMessage = {
-      id: (
-        Date.now() + 1
-      ).toString(),
-      role: 'assistant',
-      text:
-        data.message ??
-        'Here are some products',
-      products:
-        data.products ?? [],
-    };
+    try {
+      let activeConversationId = conversationId;
+      if (!activeConversationId) {
+        const conversation = await copilotApi.createConversation();
+        activeConversationId = conversation.id;
+        setConversationId(activeConversationId);
+      }
+      if (!activeConversationId) throw new Error('Conversation creation failed');
+      if (!skipPersistUser) await copilotApi.saveMessage(activeConversationId, 'user', query);
 
-    setMessages(prev => [
-      ...prev,
-      aiMsg,
-    ]);
-  } catch (error) {
-    console.log(
-      'Copilot error:',
-      error
-    );
-
-    setMessages(prev => [
-      ...prev,
-      {
-        id: (
-          Date.now() + 1
-        ).toString(),
-        role: 'assistant',
-        text:
-          'Backend offline or request failed.',
-      },
-    ]);
-  } finally {
-    setLoading(false);
-  }
-};
+      const data = await copilotApi.legacyChat(query, messages.slice(-4).map(message => message.text));
+      const assistantId = `stream-${Date.now()}`;
+      setMessages(previous => [...previous, { id: assistantId, role: 'assistant', text: '', products: data.products ?? [], streaming: true }]);
+      setTyping(true);
+      await renderStreamingText(data.message ?? 'Here are some products.', text => {
+        setMessages(previous => previous.map(message => message.id === assistantId ? { ...message, text, streaming: true } : message));
+      });
+      setMessages(previous => previous.map(message => message.id === assistantId ? { ...message, streaming: false } : message));
+      const productIds = (data.products ?? []).map((product: any) => Number(product.id)).filter((id: number) => Number.isFinite(id));
+      await copilotApi.saveMessage(activeConversationId, 'assistant', data.message ?? 'Here are some products.', productIds);
+      await loadConversationList(true);
+    } catch (error) {
+      console.log('Copilot error:', error);
+      setLastFailedQuery(query);
+      setMessages(previous => previous.map(message => message.id === localUserId ? { ...message, failed: true } : message));
+    } finally {
+      setTyping(false);
+      setLoading(false);
+    }
+  };
 
   // ─── Compare follow-up ───
   const handleCompareSend = () => {
@@ -248,6 +279,21 @@ export default function CopilotScreen() {
         )}
         <View style={[s.bubble, isUser ? { backgroundColor: colors.primary } : { backgroundColor: colors.card, borderColor: colors.border, borderWidth: 1 }]}>
           <Text style={[s.bubbleText, { color: isUser ? '#fff' : colors.text }]}>{item.text}</Text>
+          {item.streaming && <Text style={[s.streamingLabel, { color: colors.textMuted }]}>Typing…</Text>}
+          {item.failed && (
+            <TouchableOpacity style={[s.messageAction, { borderColor: colors.error }]} onPress={() => item.text && handleDiscoverSend(item.text, true)}>
+              <Text style={[s.messageActionText, { color: colors.error }]}>Retry</Text>
+            </TouchableOpacity>
+          )}
+          {!isUser && !item.streaming && item.text.length > 0 && (
+            <TouchableOpacity style={[s.messageAction, { borderColor: colors.primary }]} onPress={() => {
+              const index = messages.findIndex(message => message.id === item.id);
+              const previousUser = messages.slice(0, index).reverse().find(message => message.role === 'user');
+              if (previousUser) handleDiscoverSend(previousUser.text, true);
+            }}>
+              <Text style={[s.messageActionText, { color: colors.primary }]}>Regenerate</Text>
+            </TouchableOpacity>
+          )}
           {item.products && item.products.length > 0 && (
             <ScrollView horizontal showsHorizontalScrollIndicator={false} style={s.prodScroll}>
               {item.products.map(renderProductCard)}
@@ -337,6 +383,28 @@ const suggestions =
         )}
       </View>
 
+      {mode === 'discover' && (
+        <View style={s.conversationBar}>
+          <TouchableOpacity style={[s.newChatButton, { backgroundColor: colors.primary }]} onPress={startNewConversation} disabled={loading || !isBackendConnected}>
+            <Ionicons name="add" size={16} color="#fff" />
+          </TouchableOpacity>
+          <FlatList
+            horizontal
+            data={conversations}
+            keyExtractor={item => item.id}
+            showsHorizontalScrollIndicator={false}
+            onEndReached={() => { void loadConversationList(); }}
+            onEndReachedThreshold={0.5}
+            renderItem={({ item }) => (
+              <TouchableOpacity onPress={() => { void switchConversation(item.id); }} style={[s.conversationChip, { backgroundColor: item.id === conversationId ? colors.primaryGlow : colors.card, borderColor: item.id === conversationId ? colors.primary : colors.border }]}>
+                <Text numberOfLines={1} style={[s.conversationChipText, { color: colors.text }]}>{item.title}</Text>
+              </TouchableOpacity>
+            )}
+            ListFooterComponent={loadingConversations ? <ActivityIndicator size="small" color={colors.primary} style={{ marginHorizontal: 8 }} /> : null}
+          />
+        </View>
+      )}
+
       {/* Toggle */}
       <View style={[s.toggle, { backgroundColor: colors.bgSecondary, borderColor: colors.border }]}>
         <TouchableOpacity
@@ -373,8 +441,12 @@ const suggestions =
           ListFooterComponent={loading ? (
             <View style={s.loadingWrap}>
               <ActivityIndicator size="small" color={colors.primary} />
-              <Text style={[s.loadingText, { color: colors.textMuted }]}>Finding products...</Text>
+              <Text style={[s.loadingText, { color: colors.textMuted }]}>{typing ? 'Writing response...' : 'Finding products...'}</Text>
             </View>
+          ) : lastFailedQuery ? (
+            <TouchableOpacity style={[s.retryBanner, { backgroundColor: colors.errorBg, borderColor: colors.error }]} onPress={() => handleDiscoverSend(lastFailedQuery, true)}>
+              <Text style={[s.retryBannerText, { color: colors.error }]}>Message failed. Tap to retry.</Text>
+            </TouchableOpacity>
           ) : null}
         />
       )}
@@ -434,7 +506,7 @@ const suggestions =
       <TouchableOpacity
         key={i}
         activeOpacity={0.85}
-        disabled={loading}
+        disabled={loading || !isBackendConnected}
         style={[
           s.aiChip,
           {
@@ -443,7 +515,7 @@ const suggestions =
             borderColor:
               colors.border,
             opacity:
-              loading ? 0.5 : 1,
+              loading || !isBackendConnected ? 0.5 : 1,
           },
         ]}
         onPress={() => {
@@ -487,13 +559,14 @@ const suggestions =
           placeholderTextColor={colors.textMuted}
           value={input}
           onChangeText={setInput}
-          onSubmitEditing={mode === 'discover' ? handleDiscoverSend : handleCompareSend}
+          onSubmitEditing={() => mode === 'discover' ? void handleDiscoverSend() : handleCompareSend()}
           returnKeyType="send"
+          editable={mode === 'compare' || isBackendConnected}
         />
         <TouchableOpacity
           style={[s.sendBtn, { backgroundColor: colors.primary, opacity: input.trim() ? 1 : 0.5 }]}
-          onPress={mode === 'discover' ? handleDiscoverSend : handleCompareSend}
-          disabled={!input.trim()}
+          onPress={() => mode === 'discover' ? void handleDiscoverSend() : handleCompareSend()}
+          disabled={!input.trim() || loading || !isBackendConnected}
         >
           <Ionicons name="send" size={18} color="#fff" />
         </TouchableOpacity>
@@ -515,6 +588,10 @@ const s = StyleSheet.create({
   headerTitle: { fontSize: 24, fontWeight: '800' },
   trayBadge: { width: 28, height: 28, borderRadius: 14, justifyContent: 'center', alignItems: 'center' },
   trayBadgeText: { color: '#fff', fontSize: 13, fontWeight: '800' },
+  conversationBar: { flexDirection: 'row', alignItems: 'center', gap: 8, paddingHorizontal: 16, marginBottom: 8 },
+  newChatButton: { width: 34, height: 34, borderRadius: 17, alignItems: 'center', justifyContent: 'center' },
+  conversationChip: { maxWidth: 150, paddingHorizontal: 12, paddingVertical: 8, borderRadius: 14, borderWidth: 1, marginRight: 8 },
+  conversationChipText: { fontSize: 12, fontWeight: '700' },
   // Toggle
   toggle: { flexDirection: 'row', marginHorizontal: 20, borderRadius: 14, padding: 4, borderWidth: 1, marginBottom: 8 },
   toggleBtn: { flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6, paddingVertical: 10, borderRadius: 11 },
@@ -530,6 +607,11 @@ const s = StyleSheet.create({
   bubbleText: { fontSize: 14, lineHeight: 21 },
   loadingWrap: { flexDirection: 'row', alignItems: 'center', gap: 8, paddingLeft: 38, paddingVertical: 8 },
   loadingText: { fontSize: 13 },
+  streamingLabel: { fontSize: 11, fontStyle: 'italic', marginTop: 6 },
+  messageAction: { alignSelf: 'flex-start', borderWidth: 1, borderRadius: 10, paddingHorizontal: 8, paddingVertical: 4, marginTop: 8 },
+  messageActionText: { fontSize: 11, fontWeight: '700' },
+  retryBanner: { borderWidth: 1, borderRadius: 12, padding: 10, marginLeft: 38, marginVertical: 8 },
+  retryBannerText: { fontSize: 12, fontWeight: '700' },
   // Product cards
   prodScroll: { marginTop: 10 },
   prodCard: { width: 160, borderRadius: 14, overflow: 'hidden', marginRight: 10, borderWidth: 1 },
